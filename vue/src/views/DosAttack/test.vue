@@ -1,0 +1,102 @@
+
+
+
+
+<template>
+    <div style="padding: 10px" >
+
+        <el-row>
+            <el-col :span="12">
+
+                <el-form-item>
+                    <header ref = "Data"  >Hulk</header>
+                </el-form-item>
+            </el-col>
+        </el-row>
+
+
+
+
+        <el-row>
+            <el-col :span="12">
+                <el-form-item label="输入想要攻击的端口号">
+                    <el-input v-model="formData.Port" placeholder="Please input" />
+                </el-form-item>
+            </el-col>
+        </el-row>
+
+
+
+
+        <el-row>
+            <el-col :span="12">
+                <el-form-item label="目标IP">
+                    <el-input v-model="formData.IP" placeholder="Please input" />
+                </el-form-item>
+
+            </el-col>
+        </el-row>
+
+
+
+
+
+
+        <el-button @click="hulk()" type="primary">Attack</el-button>
+        <el-button  type="primary">End</el-button>
+
+    </div>
+</template>
+
+<script>
+
+    import request from "../../utils/request";
+
+    export default {
+        name: 'GoldenEye',
+        components: {
+
+        },
+
+       setup(){
+            console.log(this.$refs.Data)
+        },
+
+
+        data(){
+            return{
+
+                formData:{
+                    Port:'',
+                    IP:'',
+                },
+
+                httpWays:'',
+                ways:[{
+                    id: 1,
+                    name:'Get'
+                },
+                    {
+                        id: 2,
+                        name:'Post'
+                    }]
+
+            }
+        },
+
+        methods:{
+            hulk() {
+                request.post("/hulk",this.formData).then(res => {
+                    console.log(res)
+                    console.log(this.formData)
+                })
+            },
+
+
+
+        }
+
+
+
+    }
+</script>
